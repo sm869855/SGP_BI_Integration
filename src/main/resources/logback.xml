@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<property resource="application.properties" />
+<property name="pattern" value="%date %level [%thread] %logger{10} [%file:%line] %msg%n" />
+<timestamp key="byDate" datePattern="yyyy-MM-dd"/>
+<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>${log_dir}program-${byDate}.log</file>
+    <append>true</append>
+    <encoder>
+        <pattern>${pattern}</pattern>
+    </encoder>
+<!-- Support multiple-JVM writing to the same log file 
+    <prudent>true</prudent>
+ <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    <fileNamePattern>program.%d-${byDate}.log</fileNamePattern>
+    <maxHistory>30</maxHistory>
+  </rollingPolicy>
+  -->
+</appender>
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.out</target>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <!-- <level>INFO</level> -->
+    </filter>
+    <encoder>
+        <pattern>${pattern}</pattern>
+    </encoder>
+</appender>
+
+ <!-- <appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+    <smtpHost>smtp.gmail.com</smtpHost>  imap.googlemail.com and smtp.googlemail.com 
+    <smtpPort>587</smtpPort>
+    <STARTTLS>true</STARTTLS>
+    <username></username>
+    <password></password>
+    <to></to>
+    <to></to>  additional destinations are possible 
+    <from></from>
+    <subject>#PERSONAL:TESTING: %logger{20} - %m</subject>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>%date %-5level %logger - %message%n</pattern>
+    </layout>       
+  </appender> -->
+
+<root level="debug">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="EMAIL" />
+</root> 
+</configuration>

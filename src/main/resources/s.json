@@ -1,0 +1,1 @@
+{"status": {"code": "400","message": "Invalid request object or parameters"},"errors": [{"objectName": "financialData","field": "storeCode","errorCode": "10007","errorMessage": "Invalid store code"}]}
